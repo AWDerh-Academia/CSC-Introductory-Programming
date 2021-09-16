@@ -1,0 +1,17 @@
+# All basic cases on the assignment.
+0 Leaf('0')
+1 Leaf('1')
+2 Leaf('2')
+e Leaf('e')
+0* StarTree(Leaf('0'))
+e** StarTree(StarTree(Leaf('e')))
+(0|1) BarTree(Leaf('0'), Leaf('1'))
+(1.2) DotTree(Leaf('1'), Leaf('2'))
+(e|0) BarTree(Leaf('e'), Leaf('0'))
+(2.e) DotTree(Leaf('2'), Leaf('e'))
+(0*|2*) BarTree(StarTree(Leaf('0')), StarTree(Leaf('2')))
+((0.1).2) DotTree(DotTree(Leaf('0'), Leaf('1')), Leaf('2'))
+((1.(0|2)*).0) DotTree(DotTree(Leaf('1'), StarTree(BarTree(Leaf('0'), Leaf('2')))), Leaf('0'))
+((((0.1).2)*.1*).0) DotTree(DotTree(StarTree(DotTree(DotTree(Leaf('0'), Leaf('1')), Leaf('2'))), StarTree(Leaf('1'))), Leaf('0'))
+
+(0.(1.(1|2)))* StarTree(DotTree(Leaf('0'), DotTree(Leaf('1'), BarTree(Leaf('1'), Leaf('2')))))

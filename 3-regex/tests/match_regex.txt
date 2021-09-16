@@ -1,0 +1,73 @@
+# Let's try some simple ones..
+e E T 1 F
+0 0 T E F
+1 1 T E F
+2 2 T E F
+e* E T 1 F 111 F 01201 F
+1* E T 1111111 T
+(0|1) 01 F 10 F 1 T 0 T
+(1|0) 01 F 10 F 1 T 0 T
+(0|1)* 01 T 10 T 1 T 0 T E T 2 F E T 010110101010101010111101010101010 T 0012 F
+(0|1)*** 01 T 10 T 1 T 0 T E T 2 F E T 0101010101101010101010101011010 T 1120 F
+(1.2) 12 T 0 F E F 1 F 2 F
+((0.1).2) 01 F 0 F E F 2 F 012 T 0121 F
+((1|2)*.0) 1212121212 F 121211210 T 0 T 1212112100 F
+((1|2)*.0*) 1212112100 T E T
+(0.(1.2))* 012012012 T 012 T E T 0120 F
+(1.(1|2)) 1 F 0 F E F 11 T 12 T 21 F
+(1.(1|2))* E T 1 F 12 T 111112121212 T 112121212122 F
+(0.(1.(1|2)))* E T 0 F 01 F 011 T 012 T 011012011012012011 T 011012011012012012 T 01101201101201201 F
+(e.1) E F 1 T
+(e|1) E T 1 T
+(e|1)* E T 1 T 1111 T
+(e.1)* E T 1 T 11 T
+(e|e)* E T 123123 F 1 F 2 F 0 F
+(e.e) E T
+(1.e) 1 T E F
+(e.1) E F 1 T
+(e.1*) E T 1 T 111111 T
+((2.1).(2.1)) 21 F 2121 T E F 212 F 2120 F
+
+# I wanna force both dot and bar from the extreme left and extreme right. Where
+# The left only works but the right doesn't have to (and also when it does!)
+# These extreme cases are tricky...
+((0|1)*.2*) E T 1 T 010101110002 T 0101011100022222 T 01010111000222221 F
+(2*.(0|1)*) E T 2 T 21 T 20 T 02 F 0123123 F 0101010101010 T
+((0|1)*|2*) E T 1 T 0 T 2 T
+
+# Tricky Star case
+((0.1)|((0.1).2))* E T 01 T 012 T 01201 T
+((0|1)|(1.0))* E T 0 T 01 T 10 T 10100000100010 T
+(((0.1).2).0)
+
+# Composition tricky case, where star needs to take into account of each posssible combination.
+((((0|1)|2)|((0.1).2))*.(2.(0.(1.2)))) 012012 T
+
+# Dual Sequences
+(2*.2*) E T 2 T 22 T
+((0|1)*.(0.1)*) E T 01 T 0101 T 001 T 00001 T 110001 T 111000 T
+((0.1)*.(0|1)*) E T 01 T 0101 T 001 T 00001 T 110001 T 111000 T
+
+# Left Sequence
+(2*.2) E F 1 F 2 T 22 T 22222 T 11212121 F
+
+# Right Sequence
+
+# Full Sequence
+((2.1).2) 212 T
+
+# Sequence topped by one or more characters, left and right
+(2*.((2.1).2)) 212 T 2212 T 22212 T 2221 F
+(((2.1).2).2*) 212 T 2122 T 2212 F
+
+# Building up the sequences stopped by a single character.
+((0.1).2) 012 T 0 F 1 F E F
+((0.1).2)* E T 012 T 012012 T 0121 F
+(((0.1).2)*.1*) E T 012012 T 012 T 0121 T 012111111 T 0122 F
+((((0.1).2)*.1*).0) 0120 T 10 T 012 F 0 T 01 F
+
+# Need to be able to shrink any arbitrary * pattern to accomodate...
+((((0.1).2)*.1*).(0|1)) 0120 T 0121 T
+
+# Example from handout.
+((1.(0|1)*).0) 10 T E F 1 F 0 F 101 F 110 T 101000 T
